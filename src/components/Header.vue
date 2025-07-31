@@ -139,8 +139,8 @@ onMounted(() => {
 <template>
     <div class="home-container">
         <canvas ref="canvasRef" class="firework-bg"></canvas>
-        <a-row :gutter="20" class="home-row">
-            <a-col :span="16">
+        <a-row :gutter="10" class="home-row">
+            <a-col :span="10">
                 <img :src="logo" alt="logo" class="logo">
                 <span class="title">Thế giới casino trong tầm tay bạn</span>
             </a-col>
@@ -152,6 +152,11 @@ onMounted(() => {
             </a-col>
             <a-col :span="8" v-else>
                 <UserStatus />
+            </a-col>
+            <a-col :span="6" >
+                <a-button type="link" size="small" style="padding: 0; margin-top: 10px;">
+                    <i class="fas fa-headset" style="font-size: 20px; color: #FFD700;"></i>
+                </a-button>
             </a-col>
         </a-row>
     </div>

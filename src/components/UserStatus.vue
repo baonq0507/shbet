@@ -2,12 +2,21 @@
     <div class="user-status">
         <div v-if="isAuthenticated" class="authenticated">
             <span class="welcome">Xin chào, {{ currentUser?.fullname || currentUser?.username || 'User' }}!</span>
-            <a-button type="link" @click="handleLogout" class="logout-btn">
-                Đăng xuất
+            <span style="padding-left: 10px;">Ví: {{ currentUser?.wallet?.balance || 0 }} </span>
+            <a-button type="primary" @click="handleDeposit" class="edit-profile-btn" size="small">
+                <i class="fas fa-money-bill-wave"></i>
+                <span style="font-size: 12px; padding-left: 5px;">Nạp tiền</span>
             </a-button>
+            <a-button type="primary" @click="handleWithdraw" class="edit-profile-btn" size="small">
+                <i class="fas fa-money-bill-wave"></i>
+                <span style="font-size: 12px; padding-left: 5px;">Rút tiền</span>
+            </a-button>
+            <!-- <a-button type="link" @click="handleLogout" class="logout-btn">
+                Đăng xuất
+            </a-button> -->
         </div>
         <div v-else class="not-authenticated">
-            <span>Bạn chưa đăng nhập</span>
+            <span>Bạn chưa đăng nhập</span>1
         </div>
     </div>
 </template>

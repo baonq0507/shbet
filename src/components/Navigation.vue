@@ -8,7 +8,7 @@
           <div class="nav-link">
             <i :class="item.icon"></i>
             <span>{{ item.text }}</span>
-            <div class="dropdown" v-if="activeDropdown === item.id" 
+            <div class="dropdown" v-if="item.dropdown && activeDropdown === item.id" 
                  @mouseenter="keepDropdown(item.id)"
                  @mouseleave="hideDropdown">
               <div class="dropdown-content">
@@ -130,6 +130,8 @@ async function handleDropdownItemClick(subItem, parentItem) {
   text-align: center;
   z-index: 101;
   padding-bottom: 10px;
+  /* Tạo vùng hover rộng hơn */
+  padding-top: 10px;
 }
 
 .nav-link {
@@ -141,25 +143,20 @@ async function handleDropdownItemClick(subItem, parentItem) {
   text-decoration: none;
   padding: 10px 8px;
   height: 60px;
-  transition: all 0.3s ease;
+  transition: all 0.15s ease;
   cursor: pointer;
   position: relative;
   z-index: 102;
   background: transparent;
   pointer-events: auto;
-}
-
-.nav-link:hover {
-  background: rgba(255, 215, 0, 0.08);
-  color: var(--gold-light);
-  transform: translateY(-2px);
-  box-shadow: 0 2px 8px 0 rgba(255, 215, 0, 0.08);
+  border-radius: 8px;
+  border: 1px solid transparent;
 }
 
 .nav-link i {
   font-size: 18px;
   margin-bottom: 4px;
-  transition: all 0.3s ease;
+  transition: all 0.15s ease;
   color: var(--gold-dark);
   text-shadow: 0 1px 4px rgba(255, 215, 0, 0.15);
 }
@@ -174,15 +171,6 @@ async function handleDropdownItemClick(subItem, parentItem) {
   text-shadow: 0 1px 4px rgba(255, 215, 0, 0.10);
 }
 
-.nav-link:hover i {
-  color: var(--gold);
-  /* transform: scale(1.1); */
-  text-shadow: 0 2px 8px rgba(255, 215, 0, 0.25);
-}
-
-.nav-link:hover span {
-  color: var(--gold-light);
-}
 
 /* Dropdown styles */
 .dropdown {
@@ -190,29 +178,21 @@ async function handleDropdownItemClick(subItem, parentItem) {
   top: 100%;
   left: 50%;
   transform: translateX(-50%);
-  background: var(--black2);
-  border-radius: 8px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+  background-color: #232323 !important;
+  background: #232323 !important;
+  border-radius: 12px;
+  box-shadow: 0 12px 35px rgba(0,0,0,0.9), 0 0 20px rgba(255, 215, 0, 0.1);
   min-width: 180px;
   z-index: 1000;
-  animation: dropdownFadeIn 0.3s ease;
-  margin-top: 5px;
-  border: 1.5px solid var(--gold);
+  animation: dropdownFadeIn 0.15s ease;
+  margin-top: -10px;
+  border: 2px solid var(--gold);
   pointer-events: auto;
-}
-
-.dropdown::before {
-  content: '';
-  position: absolute;
-  top: -8px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 0;
-  height: 0;
-  border-left: 8px solid transparent;
-  border-right: 8px solid transparent;
-  border-bottom: 8px solid var(--black2);
-  filter: drop-shadow(0 0 2px var(--gold));
+  opacity: 1 !important;
+  backdrop-filter: none !important;
+  /* Tạo vùng hover rộng hơn */
+  /* padding-top: 20px; */
+  transition: all 0.15s ease;
 }
 
 .dropdown-content {
@@ -220,6 +200,9 @@ async function handleDropdownItemClick(subItem, parentItem) {
   position: relative;
   z-index: 1001;
   pointer-events: auto;
+  background-color: #232323 !important;
+  background: #232323 !important;
+  backdrop-filter: none !important;
 }
 
 .dropdown-item {
@@ -228,68 +211,48 @@ async function handleDropdownItemClick(subItem, parentItem) {
   padding: 5px;
   color: var(--gold);
   text-decoration: none;
-  transition: all 0.2s ease;
+  transition: all 0.1s ease;
   cursor: pointer;
-  background: transparent;
+  background-color: #232323 !important;
+  background: #232323 !important;
   font-weight: 500;
   pointer-events: auto;
 }
 
 .dropdown-item:hover {
-  background: linear-gradient(90deg, rgba(255,215,0,0.08) 0%, rgba(255,215,0,0.18) 100%);
+  background: linear-gradient(90deg, rgba(255,215,0,0.15) 0%, rgba(255,215,0,0.25) 100%);
   color: var(--gold-light);
-  /* transform: translateX(5px); */
+  transform: translateX(5px) scale(1.01);
+  box-shadow: 0 2px 8px rgba(255, 215, 0, 0.2);
+  border-radius: 6px;
+  transition: all 0.1s ease;
 }
 
-.dropdown-item i {
-  margin-right: 12px;
-  font-size: 16px;
-  width: 20px;
-  text-align: center;
-  color: var(--gold-dark);
-  transition: color 0.2s;
-}
-
-.dropdown-item:hover i {
-  color: var(--gold);
-}
-
-.dropdown-item span {
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--gold);
-}
-
-.dropdown-item:hover span {
-  color: var(--gold-light);
-}
 
 /* Animation */
 @keyframes dropdownFadeIn {
   from {
     opacity: 0;
-    transform: translateX(-50%) translateY(-10px);
+    transform: translateX(-50%) translateY(-8px) scale(0.98);
   }
   to {
     opacity: 1;
-    transform: translateX(-50%) translateY(0);
+    transform: translateX(-50%) translateY(0) scale(1);
   }
 }
 
-/* Ensure dropdown is always visible */
-.nav-item:hover .dropdown {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
+/* Tạo vùng hover liền mạch cho toàn bộ nav-item */
+.nav-item {
+  position: relative;
 }
 
-/* Ensure dropdown stays visible when hovering dropdown items */
-.dropdown:hover {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
+.nav-item:hover {
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.15) 0%, rgba(255, 215, 0, 0.08) 100%);
+  color: var(--gold-light);
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 6px 20px rgba(255, 215, 0, 0.25);
+  border: 1px solid rgba(255, 215, 0, 0.3);
 }
-
 /* Responsive design */
 @media (max-width: 1200px) {
   .nav-menu {
