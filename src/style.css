@@ -1,0 +1,104 @@
+html, body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background-color: #111; /* Đen đậm hơn */
+    color: #FFD700; /* Vàng */
+}
+
+#app {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #181818 0%, #222 100%);
+}
+
+.home-container {
+    width: 100%;
+    color: #fff;
+    background: linear-gradient(135deg, #18191a 0%, #232526 100%);
+    padding: 15px;
+    position: relative;
+    overflow: hidden;
+}
+.firework-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+.logo {
+    object-fit: cover;
+    z-index: 1;
+    position: relative;
+}
+.title {
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    text-transform: uppercase;
+    padding-left: 10px;
+    color: #FFD700;
+    z-index: 1;
+    position: relative;
+}
+.home-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+}
+
+.ant-btn-primary {
+    background-color: #FFD700;
+    color: #111;
+    border: 2px solid #FFD700;
+    box-shadow: 0 2px 8px rgba(255, 215, 0, 0.15);
+    transition: background 0.2s, color 0.2s;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+.ant-btn-primary:hover, .ant-btn-primary:focus {
+    background-color: #111 !important;
+    color: #FFD700;
+    border: 2px solid #FFD700;
+}
+
+a {
+    color: #FFD700;
+}
+a:hover {
+    color: #fff700;
+    text-decoration: underline;
+}
+
+/* Navigation styles */
+.navigation {
+    position: relative;
+    z-index: 100;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Ensure navigation is above other elements */
+.nav-menu {
+    position: relative;
+    z-index: 101;
+}
+
+/* Fix dropdown positioning */
+.dropdown {
+    z-index: 1000 !important;
+}
+
+/* Ensure modals are above navigation */
+.ant-modal-mask,
+.ant-modal-wrap,
+.ant-modal {
+    z-index: 10000 !important;
+}
