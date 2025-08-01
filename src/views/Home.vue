@@ -1,9 +1,10 @@
 <script setup>
-import { onMounted, onBeforeUnmount, ref, computed } from 'vue';
+import { onMounted, onBeforeUnmount, ref, computed, watch } from 'vue';
 import Register from '@components/modal/Register.vue';
 import Header from '@components/Header.vue';
 import Navigation from '@components/Navigation.vue';
 import Login from '@components/modal/Login.vue';
+import { getGameList } from '@/services/player';
 
 const registerModal = ref(false);
 const loginModal = ref(false);
@@ -17,147 +18,80 @@ const handleOpenRegisterPopup = () => {
 }
 
 const onChange = (current) => {
-    console.log(current);
+    // console.log(current);
+};
+
+// Casino panel management
+const activeCasinoPanel = ref('casino'); // Không có panel nào active từ đầu
+
+const setActiveCasinoPanel = (panelId) => {
+    activeCasinoPanel.value = panelId;
 };
 
 // Games navigation functionality
-const activeCategory = ref('PG Điện Tử');
-
+const currentGames = ref([]);
+const isLoadingGameList = ref(false);
 const categories = [
-    'PG Điện Tử',
-    'TP Điện Tử', 
-    'JILI Điện Tử',
-    'CQ9 Điện Tử',
-    'FC Điện Tử',
-    'YGR Điện Tử',
-    'JILI Bắn Cá',
-    'PP Điện Tử'
+    {
+        name: 'CQ9 Điện Tử',
+        gpid: 2
+    },
+    {
+        name: 'WM Điện Tử',
+        gpid: 13
+    },
+    {
+        name: 'SBO Điện Tử',
+        gpid: 14
+    },
+    {
+        name: 'FK Điện Tử',
+        gpid: 16
+    },
+    {
+        name: 'YG Điện Tử',
+        gpid: 22
+    },
+    {
+        name: 'MG Điện Tử',
+        gpid: 29
+    },
+    {
+        name: 'PG Điện Tử',
+        gpid: 35
+    },
+    {
+        name: 'YGR Điện Tử',
+        gpid: 1010
+    },
+    {
+        name: 'PT Điện Tử',
+        gpid: 1018
+    },
+    {
+        name: 'JILI Điện Tử',
+        gpid: 1020
+    }
 ];
+const activeCategory = ref(categories[0].gpid);
 
-// Games data for each category
-const gamesData = {
-    'PG Điện Tử': [
-        { name: 'Kho Báu Aztec', image: 'AZTEC', jackpot: '100.00' },
-        { name: 'Đường Mạt Chược', image: 'MAHJONG' },
-        { name: 'Đường Mạt Chược 2', image: 'MAHJONG2' },
-        { name: 'Neko May Mắn', image: 'NEKO', jackpot: '25.000' },
-        { name: 'Chiến Thắng CaiShen', image: 'CAISHEN' },
-        { name: 'Wild Đạo Tặc', image: 'BANDIT' },
-        { name: 'Pháo hoa Wild', image: 'FIREWORKS' },
-        { name: 'Giấc Mơ Ma Cao', image: 'MACAU' },
-        { name: 'Kỳ Lân Mách Nước', image: 'QILIN' },
-        { name: 'Kho Báu Ganesha', image: 'GANESHA' },
-        { name: 'Kho Báu Của Thuyền Trưởng', image: 'CAPTAIN' },
-        { name: 'Quyết Chiến Tiền Thưởng', image: 'BOUNTY' }
-    ],
-    'TP Điện Tử': [
-        { name: 'Fortune Tiger', image: 'TIGER', jackpot: '50.00' },
-        { name: 'Dragon Tiger', image: 'DRAGON' },
-        { name: 'Baccarat Pro', image: 'BACCARAT' },
-        { name: 'Roulette Gold', image: 'ROULETTE', jackpot: '15.000' },
-        { name: 'Blackjack VIP', image: 'BLACKJACK' },
-        { name: 'Poker Master', image: 'POKER' },
-        { name: 'Sic Bo Fortune', image: 'SICBO' },
-        { name: 'Three Card Poker', image: 'THREECARD' },
-        { name: 'Caribbean Stud', image: 'CARIBBEAN' },
-        { name: 'Texas Holdem', image: 'TEXAS' },
-        { name: 'Omaha Poker', image: 'OMAHA' },
-        { name: 'Seven Card Stud', image: 'SEVENCARD' }
-    ],
-    'JILI Điện Tử': [
-        { name: 'Super Ace', image: 'SUPERACE', jackpot: '200.00' },
-        { name: 'Fortune Gods', image: 'FORTUNEGODS' },
-        { name: 'Lucky Fishing', image: 'LUCKYFISHING' },
-        { name: 'Golden Empire', image: 'GOLDENEMPIRE', jackpot: '75.000' },
-        { name: 'Dragon Phoenix', image: 'DRAGONPHOENIX' },
-        { name: 'Treasure Hunt', image: 'TREASUREHUNT' },
-        { name: 'Mystic Fortune', image: 'MYSTICFORTUNE' },
-        { name: 'Royal Flush', image: 'ROYALFLUSH' },
-        { name: 'Golden Dragon', image: 'GOLDENDRAGON' },
-        { name: 'Lucky Star', image: 'LUCKYSTAR' },
-        { name: 'Fortune Wheel', image: 'FORTUNEWHEEL' },
-        { name: 'Diamond Quest', image: 'DIAMONDQUEST' }
-    ],
-    'CQ9 Điện Tử': [
-        { name: 'Lucky Neko', image: 'LUCKYNEKO', jackpot: '150.00' },
-        { name: 'Fortune Mouse', image: 'FORTUNEMOUSE' },
-        { name: 'Golden Toad', image: 'GOLDENTOAD' },
-        { name: 'Lucky Cat', image: 'LUCKYCAT', jackpot: '45.000' },
-        { name: 'Money Frog', image: 'MONEYFROG' },
-        { name: 'Fortune Rabbit', image: 'FORTUNERABBIT' },
-        { name: 'Golden Ox', image: 'GOLDENOX' },
-        { name: 'Lucky Horse', image: 'LUCKYHORSE' },
-        { name: 'Fortune Sheep', image: 'FORTUNESHEEP' },
-        { name: 'Golden Monkey', image: 'GOLDENMONKEY' },
-        { name: 'Lucky Rooster', image: 'LUCKYROOSTER' },
-        { name: 'Fortune Dog', image: 'FORTUNEDOG' }
-    ],
-    'FC Điện Tử': [
-        { name: 'Football Star', image: 'FOOTBALLSTAR', jackpot: '300.00' },
-        { name: 'Soccer Legend', image: 'SOCCERLEGEND' },
-        { name: 'Champion League', image: 'CHAMPIONLEAGUE' },
-        { name: 'World Cup', image: 'WORLDCUP', jackpot: '100.000' },
-        { name: 'Euro Cup', image: 'EUROCUP' },
-        { name: 'Premier League', image: 'PREMIERLEAGUE' },
-        { name: 'La Liga', image: 'LALIGA' },
-        { name: 'Bundesliga', image: 'BUNDESLIGA' },
-        { name: 'Serie A', image: 'SERIEA' },
-        { name: 'Ligue 1', image: 'LIGUE1' },
-        { name: 'Champions League', image: 'CHAMPIONSLEAGUE' },
-        { name: 'Europa League', image: 'EUROPALEAGUE' }
-    ],
-    'YGR Điện Tử': [
-        { name: 'YGR Slots', image: 'YGRSLOTS', jackpot: '500.00' },
-        { name: 'Golden YGR', image: 'GOLDENYGR' },
-        { name: 'Lucky YGR', image: 'LUCKYYGR' },
-        { name: 'Fortune YGR', image: 'FORTUNEYGR', jackpot: '200.000' },
-        { name: 'Diamond YGR', image: 'DIAMONDYGR' },
-        { name: 'Royal YGR', image: 'ROYALYGR' },
-        { name: 'VIP YGR', image: 'VIPYGR' },
-        { name: 'Premium YGR', image: 'PREMIUMYGR' },
-        { name: 'Elite YGR', image: 'ELITEYGR' },
-        { name: 'Master YGR', image: 'MASTERYGR' },
-        { name: 'Legend YGR', image: 'LEGENDYGR' },
-        { name: 'Ultimate YGR', image: 'ULTIMATEYGR' }
-    ],
-    'JILI Bắn Cá': [
-        { name: 'Ocean Treasure', image: 'OCEANTREASURE', jackpot: '1000.00' },
-        { name: 'Deep Sea', image: 'DEEPSEA' },
-        { name: 'Coral Reef', image: 'CORALREEF' },
-        { name: 'Shark Attack', image: 'SHARKATTACK', jackpot: '500.000' },
-        { name: 'Whale Hunter', image: 'WHALEHUNTER' },
-        { name: 'Dolphin Quest', image: 'DOLPHINQUEST' },
-        { name: 'Turtle Race', image: 'TURTLERACE' },
-        { name: 'Crab Battle', image: 'CRABBATTLE' },
-        { name: 'Lobster Trap', image: 'LOBSTERTRAP' },
-        { name: 'Squid Game', image: 'SQUIDGAME' },
-        { name: 'Octopus King', image: 'OCTOPUSKING' },
-        { name: 'Sea Monster', image: 'SEAMONSTER' }
-    ],
-    'PP Điện Tử': [
-        { name: 'PP Slots', image: 'PPSLOTS', jackpot: '750.00' },
-        { name: 'Golden PP', image: 'GOLDENPP' },
-        { name: 'Lucky PP', image: 'LUCKYPPS' },
-        { name: 'Fortune PP', image: 'FORTUNEPP', jackpot: '300.000' },
-        { name: 'Diamond PP', image: 'DIAMONDPP' },
-        { name: 'Royal PP', image: 'ROYALPP' },
-        { name: 'VIP PP', image: 'VIPPP' },
-        { name: 'Premium PP', image: 'PREMIUMPP' },
-        { name: 'Elite PP', image: 'ELITEPP' },
-        { name: 'Master PP', image: 'MASTERPP' },
-        { name: 'Legend PP', image: 'LEGENDPP' },
-        { name: 'Ultimate PP', image: 'ULTIMATEPP' }
-    ]
-};
+const getGames = async (gpid) => {
+    isLoadingGameList.value = true;
+    const res = await getGameList({
+        gpid: gpid
+    });
+    currentGames.value = res.games;
+    isLoadingGameList.value = false;
+}
 
-const selectCategory = (category) => {
-    activeCategory.value = category;
-};
-
-// Get current games based on active category
-const currentGames = computed(() => {
-    return gamesData[activeCategory.value] || [];
+onMounted(async () => {
+    await getGames(categories[0].gpid);
 });
+
+const selectCategory = async (gpid) => {
+    activeCategory.value = gpid;
+    await getGames(gpid);
+};
 
 const scrollLeft = () => {
     const container = document.querySelector('.nav-categories');
@@ -172,6 +106,8 @@ const scrollRight = () => {
         container.scrollBy({ left: 200, behavior: 'smooth' });
     }
 };
+
+
 
 </script>
 
@@ -193,16 +129,13 @@ const scrollRight = () => {
         </div>
     </a-carousel>
 
-    <div class="container">
+    <div class="container-fluid">
         <!-- Tính năng vượt trội của SHBET -->
         <section class="features-section">
-            <div class="features-header">
-                <div class="header-line left"></div>
-                <h2 class="features-title">NHỮNG TÍNH NĂNG VƯỢT TRỘI CỦA SHBET</h2>
-                <div class="header-line right"></div>
-            </div>
+            <section class="ambassador-section"><div class="features-header"><div class="header-line left"></div><h2 class="features-title">NHỮNG TÍNH NĂNG VƯỢT TRỘI CỦA SHBET</h2><div class="header-line right"></div></div></section>
             
             <div class="features-grid">
+                <!-- Hàng đầu tiên: 2 feature items -->
                 <div class="feature-item">
                     <div class="feature-icon">
                         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -220,8 +153,6 @@ const scrollRight = () => {
                     <h3 class="feature-title">Thương Hiệu Uy Tín</h3>
                     <p class="feature-description">Thương hiệu uy tín được nhiều người chơi lựa chọn.</p>
                 </div>
-                
-                <div class="feature-divider"></div>
                 
                 <div class="feature-item">
                     <div class="feature-icon">
@@ -244,8 +175,13 @@ const scrollRight = () => {
                     <p class="feature-description">Casino Trực Tuyến, Thể Thao, Nổ Hũ, Bắn Cá, Đá Gà... Nhiều sản phẩm đa dạng bạn có thể lựa chọn.</p>
                 </div>
                 
-                <div class="feature-divider"></div>
+                <!-- Hàng divider nằm ngang -->
+                <div class="horizontal-divider-row">
+                    <div class="horizontal-divider"></div>
+                    <div class="horizontal-divider"></div>
+                </div>
                 
+                <!-- Hàng thứ hai: 2 feature items -->
                 <div class="feature-item">
                     <div class="feature-icon">
                         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -263,8 +199,6 @@ const scrollRight = () => {
                     <h3 class="feature-title">An Ninh Bảo Mật</h3>
                     <p class="feature-description">Phương thức thanh toán đa dạng, đảm bảo an toàn và bảo mật cao.</p>
                 </div>
-                
-                <div class="feature-divider"></div>
                 
                 <div class="feature-item">
                     <div class="feature-icon">
@@ -287,7 +221,6 @@ const scrollRight = () => {
                     <h3 class="feature-title">Giao Dịch Nhanh Chóng</h3>
                     <p class="feature-description">Giao dịch gửi tiền được xử lý trong vòng 1-3 phút khi nhận được khoản chuyển. Thời gian rút tiền trong vòng 5-15 phút.</p>
                 </div>
-                <div class="feature-divider"></div>
             </div>
         </section>
         
@@ -301,11 +234,211 @@ const scrollRight = () => {
         </section>
     </div>
 
-    <div class="container">
+    <div class="container-fluid">
+        <!-- SẢN PHẨM Section -->
+        <div class="products-section">
+            <section class="ambassador-section"><div class="features-header"><div class="header-line left"></div><h2 class="features-title">SẢN PHẨM</h2><div class="header-line right"></div></div></section>
+            
+            <div class="products-container" @mouseleave="setActiveCasinoPanel(null)">
+                <!-- CASINO Panel -->
+                <div 
+                    class="casino-panel"
+                    :class="{ active: activeCasinoPanel === 'casino' }"
+                    @mouseenter="setActiveCasinoPanel('casino')"
+                >
+                    <div class="casino-header">
+                        <h3>CASINO</h3>
+                        <p>SẢNH HOT</p>
+                    </div>
+                    
+                    <div class="casino-content">
+                        <div v-if="activeCasinoPanel === 'casino'" class="casino-buttons">
+                            <button class="casino-btn">MT TRỰC TUYẾN</button>
+                            <button class="casino-btn">SE TRỰC TUYẾN</button>
+                            <button class="casino-btn">DG TRỰC TUYẾN</button>
+                            <button class="casino-btn">WM TRỰC TUYẾN</button>
+                            <button class="casino-btn">EVO TRỰC TUYẾN</button>
+                            <button class="casino-btn">SA TRỰC TUYẾN</button>
+                            <button class="casino-btn">PA TRỰC TUYẾN</button>
+                        </div>
+                        
+                        <div class="casino-image">
+                            <img src="@assets/product1.png" alt="Casino Hostess" />
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- NỔ HŨ Panel -->
+                <div 
+                    class="casino-panel"
+                    :class="{ active: activeCasinoPanel === 'nohu' }"
+                    @mouseenter="setActiveCasinoPanel('nohu')"
+                >
+                    <div class="casino-header">
+                        <h3>NỔ HŨ</h3>
+                        <p>SẢNH HOT</p>
+                    </div>
+                    
+                    <div class="casino-content">
+                        <div v-if="activeCasinoPanel === 'nohu'" class="casino-buttons">
+                            <button class="casino-btn">MT TRỰC TUYẾN</button>
+                            <button class="casino-btn">SE TRỰC TUYẾN</button>
+                            <button class="casino-btn">DG TRỰC TUYẾN</button>
+                            <button class="casino-btn">WM TRỰC TUYẾN</button>
+                            <button class="casino-btn">EVO TRỰC TUYẾN</button>
+                            <button class="casino-btn">SA TRỰC TUYẾN</button>
+                            <button class="casino-btn">PA TRỰC TUYẾN</button>
+                        </div>
+                        
+                        <div class="casino-image">
+                            <img src="@assets/product2.png" alt="Casino Hostess" />
+                        </div>
+                    </div>
+                </div>
+
+                <div 
+                    class="casino-panel"
+                    :class="{ active: activeCasinoPanel === 'banca' }"
+                    @mouseenter="setActiveCasinoPanel('banca')"
+                >
+                    <div class="casino-header">
+                        <h3>BẮN CÁ</h3>
+                        <p>SẢNH HOT</p>
+                    </div>
+                    
+                    <div class="casino-content">
+                        <div v-if="activeCasinoPanel === 'banca'" class="casino-buttons">
+                            <button class="casino-btn">MT TRỰC TUYẾN</button>
+                            <button class="casino-btn">SE TRỰC TUYẾN</button>
+                            <button class="casino-btn">DG TRỰC TUYẾN</button>
+                            <button class="casino-btn">WM TRỰC TUYẾN</button>
+                            <button class="casino-btn">EVO TRỰC TUYẾN</button>
+                            <button class="casino-btn">SA TRỰC TUYẾN</button>
+                            <button class="casino-btn">PA TRỰC TUYẾN</button>
+                        </div>
+                        
+                        <div class="casino-image">
+                            <img src="@assets/product3.png" alt="Casino Hostess" />
+                        </div>
+                    </div>
+                </div>
+
+                <div 
+                    class="casino-panel"
+                    :class="{ active: activeCasinoPanel === 'thethao' }"
+                    @mouseenter="setActiveCasinoPanel('thethao')"
+                >
+                    <div class="casino-header">
+                        <h3>THỂ THAO</h3>
+                        <p>SẢNH HOT</p>
+                    </div>
+                    
+                    <div class="casino-content">
+                        <div v-if="activeCasinoPanel === 'thethao'" class="casino-buttons">
+                            <button class="casino-btn">MT TRỰC TUYẾN</button>
+                            <button class="casino-btn">SE TRỰC TUYẾN</button>
+                            <button class="casino-btn">DG TRỰC TUYẾN</button>
+                            <button class="casino-btn">WM TRỰC TUYẾN</button>
+                            <button class="casino-btn">EVO TRỰC TUYẾN</button>
+                            <button class="casino-btn">SA TRỰC TUYẾN</button>
+                            <button class="casino-btn">PA TRỰC TUYẾN</button>
+                        </div>
+                        
+                        <div class="casino-image">
+                            <img src="@assets/product4.png" alt="Casino Hostess" />
+                        </div>
+                    </div>
+                </div>
+
+                <div 
+                    class="casino-panel"
+                    :class="{ active: activeCasinoPanel === 'gamebai' }"
+                    @mouseenter="setActiveCasinoPanel('gamebai')"
+                >
+                    <div class="casino-header">
+                        <h3>GAME BÀI</h3>
+                        <p>SẢNH HOT</p>
+                    </div>
+                    
+                    <div class="casino-content">
+                        <div v-if="activeCasinoPanel === 'gamebai'" class="casino-buttons">
+                            <button class="casino-btn">MT TRỰC TUYẾN</button>
+                            <button class="casino-btn">SE TRỰC TUYẾN</button>
+                            <button class="casino-btn">DG TRỰC TUYẾN</button>
+                            <button class="casino-btn">WM TRỰC TUYẾN</button>
+                            <button class="casino-btn">EVO TRỰC TUYẾN</button>
+                            <button class="casino-btn">SA TRỰC TUYẾN</button>
+                            <button class="casino-btn">PA TRỰC TUYẾN</button>
+                        </div>
+                        
+                        <div class="casino-image">
+                            <img src="@assets/product5.png" alt="Casino Hostess" />
+                        </div>
+                    </div>
+                </div>
+
+                <div 
+                    class="casino-panel"
+                    :class="{ active: activeCasinoPanel === 'dagaa' }"
+                    @mouseenter="setActiveCasinoPanel('dagaa')"
+                >
+                    <div class="casino-header">
+                        <h3>ĐÁ GÀ</h3>
+                        <p>SẢNH HOT</p>
+                    </div>
+                    
+                    <div class="casino-content">
+                        <div v-if="activeCasinoPanel === 'dagaa'" class="casino-buttons">
+                            <button class="casino-btn">MT TRỰC TUYẾN</button>
+                            <button class="casino-btn">SE TRỰC TUYẾN</button>
+                            <button class="casino-btn">DG TRỰC TUYẾN</button>
+                            <button class="casino-btn">WM TRỰC TUYẾN</button>
+                            <button class="casino-btn">EVO TRỰC TUYẾN</button>
+                            <button class="casino-btn">SA TRỰC TUYẾN</button>
+                            <button class="casino-btn">PA TRỰC TUYẾN</button>
+                        </div>
+                        
+                        <div class="casino-image">
+                            <img src="@assets/product6.png" alt="Casino Hostess" />
+                        </div>
+                    </div>
+                </div>
+
+                <div 
+                    class="casino-panel"
+                    :class="{ active: activeCasinoPanel === 'xoso' }"
+                    @mouseenter="setActiveCasinoPanel('xoso')"
+                >
+                    <div class="casino-header">
+                        <h3>XỔ SỐ</h3>
+                        <p>SẢNH HOT</p>
+                    </div>
+                    
+                    <div class="casino-content">
+                        <div v-if="activeCasinoPanel === 'xoso'" class="casino-buttons">
+                            <button class="casino-btn">MT TRỰC TUYẾN</button>
+                            <button class="casino-btn">SE TRỰC TUYẾN</button>
+                            <button class="casino-btn">DG TRỰC TUYẾN</button>
+                            <button class="casino-btn">WM TRỰC TUYẾN</button>
+                            <button class="casino-btn">EVO TRỰC TUYẾN</button>
+                            <button class="casino-btn">SA TRỰC TUYẾN</button>
+                            <button class="casino-btn">PA TRỰC TUYẾN</button>
+                        </div>
+                        
+                        <div class="casino-image">
+                            <img src="@assets/product7.png" alt="Casino Hostess" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
         <!-- TRÒ CHƠI YÊU THÍCH -->
         <section class="favorite-games-section">
             <div class="favorite-games-header">
-                <div class="header-decoration"></div>
+                <!-- <div class="header-decoration"></div> -->
                 <h2 class="favorite-games-title">TRÒ CHƠI YÊU THÍCH</h2>
             </div>
             
@@ -320,12 +453,12 @@ const scrollRight = () => {
                 <div class="nav-categories">
                     <button 
                         v-for="category in categories" 
-                        :key="category"
+                        :key="category.name"
                         class="nav-category"
-                        :class="{ active: activeCategory === category }"
-                        @click="selectCategory(category)"
+                        :class="{ active: activeCategory === category.gpid }"
+                        @click="selectCategory(category.gpid)"
                     >
-                        {{ category }}
+                        {{ category.name }}
                     </button>
                 </div>
                 
@@ -335,22 +468,41 @@ const scrollRight = () => {
                     </svg>
                 </button>
             </div>
+
+
+          
             
-            <!-- Games Grid -->
-            <div class="games-grid">
-                <div 
-                    v-for="game in currentGames" 
-                    :key="game.name"
-                    class="game-item"
-                >
-                    <div class="game-icon">
-                        <img 
-                            :src="`https://via.placeholder.com/120x120/FFD700/000?text=${game.image}`" 
-                            :alt="game.name" 
-                        />
-                        <div v-if="game.jackpot" class="jackpot-overlay">{{ game.jackpot }}</div>
-                    </div>
-                    <button class="game-button">{{ game.name }}</button>
+            <!-- Games Grid with Vertical Scroll -->
+            <div class="games-container">
+                <div class="games-grid">
+                    <template v-if="isLoadingGameList">
+                        <div
+                            v-for="n in 12"
+                            :key="'skeleton-' + n"
+                            class="game-item"
+                        >
+                            <div class="game-icon">
+                                <a-skeleton-avatar shape="circle" :size="120" />
+                            </div>
+                            <a-skeleton-button style="width:100%;margin-top:8px;" :active="true" size="small" />
+                        </div>
+                    </template>
+                    <template v-else>
+                        <div
+                            v-for="game in currentGames" 
+                            :key="game.name"
+                            class="game-item"
+                        >
+                            <div class="game-icon">
+                                <img 
+                                    :src="game.gameInfos[0].gameIconUrl" 
+                                    :alt="game.name" 
+                                />
+                                <div v-if="game.jackpot" class="jackpot-overlay">{{ game.jackpot }}</div>
+                            </div>
+                            <button class="game-button">{{ game.gameInfos[0].gameName }}</button>
+                        </div>
+                    </template>
                 </div>
             </div>
         </section>
