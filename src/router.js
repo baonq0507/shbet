@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Login from '@views/Login.vue';
 import Home from '@views/Home.vue';
+import Deposit from '@views/Deposit.vue';
 
 const router = createRouter({
     history: createWebHistory(),
@@ -14,6 +15,11 @@ const router = createRouter({
         path: '/login',
         name: 'login',
         component: Login
+    },
+    {
+        path: '/deposit',
+        name: 'deposit',
+        component: Deposit
     }
 ]})
 

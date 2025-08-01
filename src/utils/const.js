@@ -2,7 +2,8 @@ export const menuItems = [
     {
         id: 'home',
         text: 'TRANG CHỦ',
-        icon: 'fas fa-home',
+        icon: '<svg data-v-65755c3d="" aria-hidden="true" class="svg-icon"><use data-v-65755c3d="" xlink:href="#icon-side-live-active"></use></svg>',
+        type: 'image'
     },
     {
         id: 'casino',
@@ -125,6 +126,18 @@ export const menuItems = [
             { id: 'thuonghieu-microgaming', text: 'Microgaming', icon: 'fas fa-microchip' },
             { id: 'thuonghieu-netent', text: 'NetEnt', icon: 'fas fa-network-wired' },
             { id: 'thuonghieu-playtech', text: 'Playtech', icon: 'fas fa-cogs' }
+        ]
+    },
+    {
+        id: 'deposit',
+        text: 'NẠP TIỀN',
+        icon: 'fas fa-credit-card',
+        dropdown: [
+            { id: 'deposit-bank', text: 'Chuyển khoản ngân hàng', icon: 'fas fa-university' },
+            { id: 'deposit-momo', text: 'Ví MoMo', icon: 'fas fa-mobile-alt' },
+            { id: 'deposit-zalo', text: 'Ví ZaloPay', icon: 'fab fa-google-pay' },
+            { id: 'deposit-vnpay', text: 'VNPay', icon: 'fas fa-credit-card' },
+            { id: 'deposit-history', text: 'Lịch sử nạp tiền', icon: 'fas fa-history' }
         ]
     }
 ]

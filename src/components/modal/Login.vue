@@ -56,7 +56,7 @@ const handleFinish = async (values) => {
             <div class="header-section">
                 <div class="logo-section">
                     <div class="logo">
-                        <img src="/src/assets/logo.png" alt="logo" class="logo-img" />
+                        <img src="/src/assets/logo.jpg" alt="logo" class="logo-img" />
                     </div>
                     <div class="signature">
                         <img src="/src/assets/chuky.png" alt="Chữ ký" class="signature-img" />
@@ -114,14 +114,14 @@ const handleFinish = async (values) => {
 
 <style scoped>
 .login-modal {
-    background: linear-gradient(135deg, #222 0%, #FFD600 100%);
+    background: linear-gradient(135deg, #ffffff 0%, #4a90e2 100%);
 }
 
 .login-container {
     border-radius: 15px;
     padding: 30px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    background: #111;
+    box-shadow: 0 10px 30px rgba(74, 144, 226, 0.2);
+    background: #ffffff;
 }
 
 .header-section {
@@ -130,7 +130,7 @@ const handleFinish = async (values) => {
     align-items: center;
     margin-bottom: 30px;
     padding-bottom: 20px;
-    border-bottom: 2px solid #FFD600;
+    border-bottom: 2px solid #4a90e2;
     background: transparent;
 }
 
@@ -141,21 +141,21 @@ const handleFinish = async (values) => {
 }
 
 .logo-img {
-    filter: drop-shadow(0 0 2px #FFD600);
+    filter: drop-shadow(0 0 2px #4a90e2);
 }
 
 .signature-img {
     height: 40px;
     width: auto;
-    filter: drop-shadow(0 0 2px #FFD600);
+    filter: drop-shadow(0 0 2px #4a90e2);
 }
 
 .brand-ambassador h2 {
-    color: #FFD600;
+    color: #2c5aa0;
     font-size: 18px;
     font-weight: bold;
     margin: 0;
-    text-shadow: 1px 1px 2px #000;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .login-form {
@@ -170,21 +170,21 @@ const handleFinish = async (values) => {
     border-radius: 8px;
     padding: 12px 15px;
     font-size: 14px;
-    background: #222;
-    color: #FFD600;
+    background: #ffffff;
+    color: #2c5aa0;
     transition: all 0.3s ease;
 }
 
 .custom-input:focus {
-    border-color: #FFD600 !important;
-    box-shadow: 0 0 0 2px rgba(255, 214, 0, 0.2);
-    background: #111;
-    color: #FFD600;
-    outline: #FFD600;
+    border-color: #4a90e2 !important;
+    box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+    background: #ffffff;
+    color: #2c5aa0;
+    outline: #4a90e2;
 }
 
 .custom-input::placeholder {
-    color: #FFD60099;
+    color: #999;
     opacity: 1;
 }
 
@@ -194,19 +194,19 @@ const handleFinish = async (values) => {
 }
 
 .login-button {
-    background: linear-gradient(90deg, #FFD600 0%, #FFC107 100%);
-    color: #111;
+    background: linear-gradient(90deg, #4a90e2 0%, #357abd 100%);
+    color: #fff;
     border: none;
     font-weight: bold;
     letter-spacing: 1px;
-    box-shadow: 0 2px 8px rgba(255, 214, 0, 0.2);
+    box-shadow: 0 2px 8px rgba(74, 144, 226, 0.2);
     transition: background 0.3s, color 0.3s, transform 0.2s;
     width: 100%;
 }
 
 .login-button:hover {
-    background: linear-gradient(90deg, #FFC107 0%, #FFD600 100%);
-    color: #000;
+    background: linear-gradient(90deg, #357abd 0%, #4a90e2 100%);
+    color: #fff;
     transform: translateY(-2px) scale(1.03);
     box-shadow: 0 5px 15px rgba(255, 214, 0, 0.4);
 }

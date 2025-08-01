@@ -50,12 +50,13 @@ const handleClose = () => {
 <style scoped>
 .agreement-content {
     padding: 20px 10px;
-    color: #FFD600;
-    background: #111;
+    color: #2c5aa0;
+    background: #ffffff;
     border-radius: 10px;
+    border: 1px solid #101929;
 }
 .agreement-content h1 {
-    color: #FFD600;
+    color: #2c5aa0;
     font-size: 22px;
     margin-bottom: 18px;
     text-align: center;
@@ -71,12 +72,12 @@ const handleClose = () => {
     line-height: 1.6;
 }
 .agreement-content strong {
-    color: #c59d00;
+    color: #4a90e2;
 }
 .agreement-note {
     margin-top: 18px;
     font-size: 14px;
-    color: #b38f00;
+    color: #5a6c7d;
     text-align: center;
 }
 </style>

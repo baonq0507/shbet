@@ -4,10 +4,13 @@ import Register from '@components/modal/Register.vue';
 import Header from '@components/Header.vue';
 import Navigation from '@components/Navigation.vue';
 import Login from '@components/modal/Login.vue';
+import Deposit from '@components/modal/Deposit.vue';
 import { getGameList } from '@/services/player';
 
 const registerModal = ref(false);
 const loginModal = ref(false);
+const depositModal = ref(false);
+const withdrawModal = ref(false);
 
 const handleOpenLoginPopup = () => {
     loginModal.value = true;
@@ -15,6 +18,14 @@ const handleOpenLoginPopup = () => {
 
 const handleOpenRegisterPopup = () => {
     registerModal.value = true;
+}
+
+const handleOpenDepositPopup = () => {
+    depositModal.value = true;
+}
+
+const handleOpenWithdrawPopup = () => {
+    withdrawModal.value = true;
 }
 
 const onChange = (current) => {
@@ -112,127 +123,18 @@ const scrollRight = () => {
 </script>
 
 <template>
-    <Header @open-login-popup="handleOpenLoginPopup" @open-register-popup="handleOpenRegisterPopup" />
+    <Header 
+        @open-login-popup="handleOpenLoginPopup" 
+        @open-register-popup="handleOpenRegisterPopup"
+        @open-deposit-popup="handleOpenDepositPopup"
+        @open-withdraw-popup="handleOpenWithdrawPopup"
+    />
     <Navigation @open-login-popup="handleOpenLoginPopup" />
     <a-carousel :after-change="onChange" autoplay>
         <div>
-            <img src="@/assets/banner1.jpg" alt="banner1" style="width: 100%; height: 100%; object-fit: cover;">
-        </div>
-        <div>
-            <img src="@/assets/banner2.jpg" alt="banner2" style="width: 100%; height: 100%; object-fit: cover;">
-        </div>
-        <div>
-            <img src="@/assets/banner3.jpg" alt="banner3" style="width: 100%; height: 100%; object-fit: cover;">
-        </div>
-        <div>
-            <img src="@/assets/banner4.jpg" alt="banner4" style="width: 100%; height: 100%; object-fit: cover;">
+            <img src="@/assets/banner.avif" alt="banner1" style="width: 100%; height: 400px; object-fit: cover;">
         </div>
     </a-carousel>
-
-    <div class="container-fluid">
-        <!-- Tính năng vượt trội của SHBET -->
-        <section class="features-section">
-            <section class="ambassador-section"><div class="features-header"><div class="header-line left"></div><h2 class="features-title">NHỮNG TÍNH NĂNG VƯỢT TRỘI CỦA SHBET</h2><div class="header-line right"></div></div></section>
-            
-            <div class="features-grid">
-                <!-- Hàng đầu tiên: 2 feature items -->
-                <div class="feature-item">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="3" y="6" width="18" height="12" rx="2" stroke="url(#gradient1)" stroke-width="2"/>
-                            <path d="M7 10L10 13L17 6" stroke="url(#gradient1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M9 18L12 21L15 18" stroke="url(#gradient1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <defs>
-                                <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#FFD700"/>
-                                    <stop offset="100%" style="stop-color:#FFA500"/>
-                                </linearGradient>
-                            </defs>
-                        </svg>
-                    </div>
-                    <h3 class="feature-title">Thương Hiệu Uy Tín</h3>
-                    <p class="feature-description">Thương hiệu uy tín được nhiều người chơi lựa chọn.</p>
-                </div>
-                
-                <div class="feature-item">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="3" y="6" width="18" height="12" rx="2" stroke="url(#gradient2)" stroke-width="2"/>
-                            <rect x="6" y="9" width="3" height="6" rx="1" fill="url(#gradient2)"/>
-                            <rect x="10.5" y="9" width="3" height="6" rx="1" fill="url(#gradient2)"/>
-                            <rect x="15" y="9" width="3" height="6" rx="1" fill="url(#gradient2)"/>
-                            <path d="M3 6L21 6" stroke="url(#gradient2)" stroke-width="2"/>
-                            <path d="M3 18L21 18" stroke="url(#gradient2)" stroke-width="2"/>
-                            <defs>
-                                <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#FFD700"/>
-                                    <stop offset="100%" style="stop-color:#FFA500"/>
-                                </linearGradient>
-                            </defs>
-                        </svg>
-                    </div>
-                    <h3 class="feature-title">Đa Dạng Sản Phẩm</h3>
-                    <p class="feature-description">Casino Trực Tuyến, Thể Thao, Nổ Hũ, Bắn Cá, Đá Gà... Nhiều sản phẩm đa dạng bạn có thể lựa chọn.</p>
-                </div>
-                
-                <!-- Hàng divider nằm ngang -->
-                <div class="horizontal-divider-row">
-                    <div class="horizontal-divider"></div>
-                    <div class="horizontal-divider"></div>
-                </div>
-                
-                <!-- Hàng thứ hai: 2 feature items -->
-                <div class="feature-item">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 22C12 22 20 18 20 12V5L12 2L4 5V12C4 18 12 22 12 22Z" stroke="url(#gradient3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M9 12L11 14L15 10" stroke="url(#gradient3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M12 6V10" stroke="url(#gradient3)" stroke-width="2" stroke-linecap="round"/>
-                            <defs>
-                                <linearGradient id="gradient3" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#FFD700"/>
-                                    <stop offset="100%" style="stop-color:#FFA500"/>
-                                </linearGradient>
-                            </defs>
-                        </svg>
-                    </div>
-                    <h3 class="feature-title">An Ninh Bảo Mật</h3>
-                    <p class="feature-description">Phương thức thanh toán đa dạng, đảm bảo an toàn và bảo mật cao.</p>
-                </div>
-                
-                <div class="feature-item">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="6" y="8" width="12" height="8" rx="1" stroke="url(#gradient4)" stroke-width="2"/>
-                            <path d="M6 12H18" stroke="url(#gradient4)" stroke-width="2"/>
-                            <path d="M8 16H16" stroke="url(#gradient4)" stroke-width="2"/>
-                            <path d="M2 12H4" stroke="url(#gradient4)" stroke-width="2"/>
-                            <path d="M20 12H22" stroke="url(#gradient4)" stroke-width="2"/>
-                            <path d="M12 4L12 8" stroke="url(#gradient4)" stroke-width="2" stroke-linecap="round"/>
-                            <path d="M12 20L12 24" stroke="url(#gradient4)" stroke-width="2" stroke-linecap="round"/>
-                            <defs>
-                                <linearGradient id="gradient4" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#FFD700"/>
-                                    <stop offset="100%" style="stop-color:#FFA500"/>
-                                </linearGradient>
-                            </defs>
-                        </svg>
-                    </div>
-                    <h3 class="feature-title">Giao Dịch Nhanh Chóng</h3>
-                    <p class="feature-description">Giao dịch gửi tiền được xử lý trong vòng 1-3 phút khi nhận được khoản chuyển. Thời gian rút tiền trong vòng 5-15 phút.</p>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Đại sứ thương hiệu -->
-        <section class="ambassador-section">
-            <div class="features-header">
-                <div class="header-line left"></div>
-                <h2 class="features-title">ĐẠI SỨ THƯƠNG HIỆU ANDRÉS INIESTA</h2>
-                <div class="header-line right"></div>
-            </div>
-        </section>
-    </div>
 
     <div class="container-fluid">
         <!-- SẢN PHẨM Section -->
@@ -509,4 +411,5 @@ const scrollRight = () => {
     </div>
     <Register v-model:visible="registerModal" />
     <Login v-model:visible="loginModal" />
+    <Deposit v-model:visible="depositModal" />
 </template>

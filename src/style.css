@@ -1,20 +1,20 @@
 html, body {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    background-color: #1a1a1a; /* Màu tối */
-    color: #FFD700; /* Vàng */
+    background-color: #101929; /* Màu xanh đậm */
+    color: #2c5aa0; /* Màu xanh đậm */
 }
 
 #app {
     height: 100%;
     margin: 0;
     padding: 0;
-    /* background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); */
+    /* background: linear-gradient(135deg, #101929 0%, #0f1827 100%); */
 }
 
 .home-container {
     width: 100%;
     color: #fff;
-    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    background: linear-gradient(135deg, #101929 0%, #0f1827 100%);
     padding: 15px;
     position: relative;
     overflow: hidden;
@@ -33,6 +33,7 @@ html, body {
     z-index: 1;
     position: relative;
     width: 180px;
+    height: 70px;
 }
 .title {
     font-size: 14px;
@@ -40,7 +41,7 @@ html, body {
     text-align: center;
     text-transform: uppercase;
     padding-left: 10px;
-    color: #FFD700;
+    color: #2c5aa0;
     z-index: 1;
     position: relative;
 }
@@ -53,25 +54,25 @@ html, body {
 }
 
 .ant-btn-primary {
-    background-color: #FFD700;
-    color: #111;
-    border: 2px solid #FFD700;
-    box-shadow: 0 2px 8px rgba(255, 215, 0, 0.15);
+    background-color: #4a90e2;
+    color: #fff;
+    border: 2px solid #4a90e2;
+    box-shadow: 0 2px 8px rgba(74, 144, 226, 0.15);
     transition: background 0.2s, color 0.2s;
     text-transform: uppercase;
     font-weight: 600;
 }
 .ant-btn-primary:hover, .ant-btn-primary:focus {
-    background-color: #1a1a1a !important;
-    color: #FFD700;
-    border: 2px solid #FFD700;
+    background-color: #357abd !important;
+    color: #fff;
+    border: 2px solid #357abd;
 }
 
 a {
-    color: #FFD700;
+    color: #4a90e2;
 }
 a:hover {
-    color: #fff700;
+    color: #2c5aa0;
     text-decoration: underline;
 }
 
@@ -109,7 +110,7 @@ a:hover {
     max-width: 95%;
     margin: 0 auto;
     padding: 40px 20px;
-    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    background: linear-gradient(135deg, #101929 0%, #0f1827 100%);
 }
 
 .features-section {
@@ -131,7 +132,7 @@ a:hover {
 
 .header-line {
     height: 2px;
-    background: linear-gradient(90deg, #404040 0%, #FFD700 50%, #404040 100%);
+    background: linear-gradient(90deg, #101929 0%, #4a90e2 50%, #101929 100%);
     flex: 1;
     max-width: 200px;
 }
@@ -147,7 +148,7 @@ a:hover {
 .features-title {
     font-size: 28px;
     font-weight: 700;
-    color: #FFD700;
+    color: #2c5aa0;
     text-align: center;
     margin: 0;
     white-space: nowrap;
@@ -171,12 +172,12 @@ a:hover {
     text-align: center;
     padding: 30px 20px;
     border-radius: 16px;
-    background: linear-gradient(145deg, #2a2a2a 0%, #1f1f1f 100%);
-    border: 1px solid #404040;
+    background: linear-gradient(145deg, #ffffff 0%, #101929 100%);
+    border: 1px solid #101929;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 25px rgba(74, 144, 226, 0.1);
     cursor: pointer;
 }
 
@@ -187,15 +188,15 @@ a:hover {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+    background: linear-gradient(90deg, transparent, rgba(74, 144, 226, 0.1), transparent);
     transition: left 0.6s ease;
 }
 
 .feature-item:hover {
     transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 20px 40px rgba(255, 215, 0, 0.25);
-    border-color: #FFD700;
-    background: linear-gradient(145deg, #333333 0%, #262626 100%);
+    box-shadow: 0 20px 40px rgba(74, 144, 226, 0.2);
+    border-color: #4a90e2;
+    background: linear-gradient(145deg, #ffffff 0%, #101929 100%);
 }
 
 .feature-item:hover::before {
@@ -210,10 +211,10 @@ a:hover {
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    /* background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); */
+    /* background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%); */
     padding: 18px;
-    border: 3px solid #FFD700;
-    box-shadow: 0 8px 20px rgba(255, 215, 0, 0.3);
+    border: 3px solid #4a90e2;
+    box-shadow: 0 8px 20px rgba(74, 144, 226, 0.2);
     transition: all 0.3s ease;
     position: relative;
 }
@@ -225,7 +226,7 @@ a:hover {
     left: -2px;
     right: -2px;
     bottom: -2px;
-    background: linear-gradient(45deg, #bfa100, #a86b00, #bfa100);
+    background: linear-gradient(45deg, #4a90e2, #357abd, #4a90e2);
     border-radius: 50%;
     z-index: -1;
     opacity: 0;
@@ -234,7 +235,7 @@ a:hover {
 
 .feature-item:hover .feature-icon {
     transform: scale(1.1) rotate(5deg);
-    box-shadow: 0 12px 30px rgba(255, 215, 0, 0.4);
+    box-shadow: 0 12px 30px rgba(74, 144, 226, 0.3);
 }
 
 .feature-item:hover .feature-icon::after {
@@ -244,28 +245,28 @@ a:hover {
 .feature-icon svg {
     width: 55px;
     height: 55px;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
 }
 
 .feature-title {
     font-size: 20px;
     font-weight: 700;
-    color: #FFD700;
+    color: #2c5aa0;
     margin: 0 0 15px 0;
     text-transform: uppercase;
     letter-spacing: 1px;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
 }
 
 .feature-item:hover .feature-title {
-    color: #FFA500;
+    color: #4a90e2;
     transform: scale(1.05);
 }
 
 .feature-description {
     font-size: 15px;
-    color: #d0d0d0;
+    color: #5a6c7d;
     line-height: 1.7;
     margin: 0;
     font-weight: 400;
@@ -273,7 +274,7 @@ a:hover {
 }
 
 .feature-item:hover .feature-description {
-    color: #ffffff;
+    color: #2c5aa0;
 }
 
 .horizontal-divider-row {
@@ -288,9 +289,9 @@ a:hover {
 .horizontal-divider {
     width: 200px;
     height: 3px;
-    background: linear-gradient(90deg, transparent 0%, #FFD700 20%, #FFA500 50%, #FFD700 80%, transparent 100%);
+    background: linear-gradient(90deg, transparent 0%, #4a90e2 20%, #357abd 50%, #4a90e2 80%, transparent 100%);
     border-radius: 2px;
-    box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+    box-shadow: 0 0 15px rgba(74, 144, 226, 0.3);
     animation: glow 2s ease-in-out infinite alternate;
 }
 
@@ -300,10 +301,10 @@ a:hover {
 
 @keyframes glow {
     from {
-        box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+        box-shadow: 0 0 15px rgba(74, 144, 226, 0.3);
     }
     to {
-        box-shadow: 0 0 25px rgba(255, 215, 0, 0.7);
+        box-shadow: 0 0 25px rgba(74, 144, 226, 0.5);
     }
 }
 
@@ -415,11 +416,11 @@ a:hover {
 /* Favorite Games Section Styles */
 .favorite-games-section {
     margin-bottom: 60px;
-    background: #1a1a1a;
+    background: #ffffff;
     border-radius: 12px;
     padding: 40px 20px;
-    box-shadow: 0 4px 20px rgba(255, 215, 0, 0.1);
-    border: 1px solid #FFD700;
+    box-shadow: 0 4px 20px rgba(74, 144, 226, 0.1);
+    border: 1px solid #4a90e2;
 }
 
 .favorite-games-header {
@@ -435,7 +436,7 @@ a:hover {
     transform: translateX(-50%);
     width: 200px;
     height: 40px;
-    background: linear-gradient(90deg, #FFD700, #FFA500, #FFD700);
+    background: linear-gradient(90deg, #4a90e2, #357abd, #4a90e2);
     border-radius: 20px;
     opacity: 0.3;
     z-index: 1;
@@ -444,7 +445,7 @@ a:hover {
 .favorite-games-title {
     font-size: 32px;
     font-weight: 700;
-    color: #FFD700;
+    color: #2c5aa0;
     margin: 0;
     position: relative;
     z-index: 2;
@@ -466,8 +467,8 @@ a:hover {
     width: 40px;
     height: 40px;
     border: none;
-    background: #FFD700;
-    color: #1a1a1a;
+    background: #4a90e2;
+    color: #ffffff;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -478,7 +479,7 @@ a:hover {
 }
 
 .nav-arrow:hover {
-    background: #FFA500;
+    background: #357abd;
     transform: scale(1.1);
 }
 
@@ -497,9 +498,9 @@ a:hover {
 
 .nav-category {
     padding: 10px 20px;
-    border: 2px solid #FFD700;
-    background: #1a1a1a;
-    color: #FFD700;
+    border: 2px solid #4a90e2;
+    background: #ffffff;
+    color: #4a90e2;
     border-radius: 25px;
     font-size: 14px;
     font-weight: 600;
@@ -510,19 +511,19 @@ a:hover {
 }
 
 .nav-category.active {
-    background: #FFD700;
-    color: #1a1a1a;
-    border-color: #FFD700;
+    background: #4a90e2;
+    color: #ffffff;
+    border-color: #4a90e2;
 }
 
 .nav-category:hover {
-    background: #FFA500;
-    color: #1a1a1a;
+    background: #357abd;
+    color: #ffffff;
     transform: translateY(-2px);
 }
 
 .nav-category.active:hover {
-    background: #FFA500;
+    background: #357abd;
 }
 
 /* Games Grid */
@@ -533,7 +534,7 @@ a:hover {
     overflow-y: auto;
     scroll-behavior: smooth;
     scrollbar-width: thin;
-    scrollbar-color: #FFD700 #2d2d2d;
+    scrollbar-color: #4a90e2 #101929;
 }
 
 .games-container::-webkit-scrollbar {
@@ -541,17 +542,17 @@ a:hover {
 }
 
 .games-container::-webkit-scrollbar-track {
-    background: #2d2d2d;
+    background: #101929;
     border-radius: 4px;
 }
 
 .games-container::-webkit-scrollbar-thumb {
-    background: #FFD700;
+    background: #4a90e2;
     border-radius: 4px;
 }
 
 .games-container::-webkit-scrollbar-thumb:hover {
-    background: #FFA500;
+    background: #357abd;
 }
 
 .games-grid {
@@ -576,8 +577,8 @@ a:hover {
     height: 120px;
     border-radius: 50%;
     overflow: hidden;
-    border: 3px solid #FFD700;
-    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+    border: 3px solid #4a90e2;
+    box-shadow: 0 4px 15px rgba(74, 144, 226, 0.2);
     transition: transform 0.3s ease;
 }
 
@@ -595,21 +596,21 @@ a:hover {
     position: absolute;
     top: 5px;
     right: 5px;
-    background: #FFD700;
-    color: #1a1a1a;
+    background: #4a90e2;
+    color: #ffffff;
     padding: 4px 8px;
     border-radius: 12px;
     font-size: 12px;
     font-weight: 700;
     min-width: 50px;
     text-align: center;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .game-button {
     padding: 8px 16px;
-    background: #FFD700;
-    color: #1a1a1a;
+    background: #4a90e2;
+    color: #ffffff;
     border: none;
     border-radius: 20px;
     font-size: 12px;
@@ -625,9 +626,9 @@ a:hover {
 }
 
 .game-button:hover {
-    background: #FFA500;
+    background: #357abd;
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4);
+    box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
 }
 
 /* Responsive Design for Games Section */
@@ -720,7 +721,7 @@ a:hover {
 .section-title h2 {
     font-size: 32px;
     font-weight: 700;
-    color: #FFD700;
+    color: #2c5aa0;
     margin: 0;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -733,7 +734,7 @@ a:hover {
     transform: translateX(-50%);
     width: 300px;
     height: 4px;
-    background: linear-gradient(90deg, #404040 0%, #FFD700 50%, #404040 100%);
+    background: linear-gradient(90deg, #101929 0%, #4a90e2 50%, #101929 100%);
     border-radius: 2px;
 }
 
@@ -746,11 +747,11 @@ a:hover {
 /* CASINO Panel */
 .casino-panel {
     margin: 0 auto;
-    background: #2a2a2a;
+    background: #ffffff;
     border-radius: 16px;
     padding: 30px 10px;
-    box-shadow: 0 8px 25px rgba(255, 215, 0, 0.15);
-    border: 1px solid #FFD700;
+    box-shadow: 0 8px 25px rgba(74, 144, 226, 0.1);
+    border: 1px solid #4a90e2;
     position: relative;
     overflow: visible;
     cursor: pointer;
@@ -759,53 +760,53 @@ a:hover {
 }
 
 .casino-panel.active {
-    background: linear-gradient(145deg, #333333 0%, #262626 100%);
-    /* box-shadow: 0 12px 35px rgba(255, 215, 0, 0.3); */
-    border: 2px solid #FFD700;
+    background: linear-gradient(145deg, #ffffff 0%, #101929 100%);
+    /* box-shadow: 0 12px 35px rgba(74, 144, 226, 0.2); */
+    border: 2px solid #4a90e2;
     transform: scale(1.02);
     /* max-width: 900px; */
 }
 
 .casino-panel:not(.active) {
     opacity: 0.7;
-    border: 1px solid #404040;
-    background: #1f1f1f;
+    border: 1px solid #101929;
+    background: #101929;
 }
 
 /* Khi không có panel nào active, tất cả panels đều không active */
 .casino-panel {
     opacity: 0.7;
-    border: 1px solid #404040;
-    background: #1f1f1f;
+    border: 1px solid #101929;
+    background: #101929;
 }
 
 .casino-panel.active {
     opacity: 1;
-    border: 2px solid #FFD700;
-    background: linear-gradient(145deg, #333333 0%, #262626 100%);
-    box-shadow: 0 12px 35px rgba(255, 215, 0, 0.3);
+    border: 2px solid #4a90e2;
+    background: linear-gradient(145deg, #ffffff 0%, #101929 100%);
+    box-shadow: 0 12px 35px rgba(74, 144, 226, 0.2);
     transform: scale(1.02);
 }
 
 .casino-panel:not(.active):hover {
     opacity: 0.9;
-    border: 1px solid #FFD700;
-    background: #2a2a2a;
+    border: 1px solid #4a90e2;
+    background: #ffffff;
 }
 
 .casino-header h3 {
     font-size: 20px;
     font-weight: 700;
-    color: #FFD700;
+    color: #2c5aa0;
     margin: 0 0 5px 0;
 }
 
 .casino-header p {
     font-size: 14px;
-    color: #383737;
+    color: #ffffff;
     font-weight: 500;
     border-radius: 10px;
-    background: linear-gradient(90deg, #FFD700 0%, #FFA500 100%);
+    background: linear-gradient(90deg, #4a90e2 0%, #357abd 100%);
     padding: 0px 10px;
     width: fit-content;
 }
@@ -877,8 +878,8 @@ a:hover {
 
 .casino-btn {
     padding: 8px;
-    background: #FFD700;
-    color: #1a1a1a;
+    background: #4a90e2;
+    color: #ffffff;
     border: none;
     border-radius: 8px;
     font-size: 12px;
@@ -891,9 +892,9 @@ a:hover {
 }
 
 .casino-btn:hover {
-    background: #FFA500;
+    background: #357abd;
     transform: translateX(8px) scale(1.05);
-    box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+    box-shadow: 0 6px 20px rgba(74, 144, 226, 0.3);
 }
 
 .casino-image {
@@ -916,7 +917,7 @@ a:hover {
 
 .casino-panel.active .casino-image img {
     transform: scale(1.15);
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1);
     z-index: 10;
     position: relative;
 }
@@ -928,7 +929,7 @@ a:hover {
     gap: 20px;
     overflow-x: auto;
     scrollbar-width: thin;
-    scrollbar-color: #FFD700 #2d2d2d;
+    scrollbar-color: #4a90e2 #101929;
 }
 
 .game-categories::-webkit-scrollbar {
@@ -936,25 +937,25 @@ a:hover {
 }
 
 .game-categories::-webkit-scrollbar-track {
-    background: #2d2d2d;
+    background: #101929;
     border-radius: 4px;
 }
 
 .game-categories::-webkit-scrollbar-thumb {
-    background: #FFD700;
+    background: #4a90e2;
     border-radius: 4px;
 }
 
 .game-categories::-webkit-scrollbar-thumb:hover {
-    background: #FFA500;
+    background: #357abd;
 }
 
 .game-card {
-    background: #2a2a2a;
+    background: #ffffff;
     border-radius: 12px;
     padding: 20px;
-    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.1);
-    border: 1px solid #FFD700;
+    box-shadow: 0 4px 15px rgba(74, 144, 226, 0.1);
+    border: 1px solid #4a90e2;
     transition: all 0.3s ease;
     cursor: pointer;
     position: relative;
@@ -970,15 +971,15 @@ a:hover {
     left: 0;
     right: 0;
     height: 4px;
-    background: linear-gradient(90deg, #FFD700, #FFA500);
+    background: linear-gradient(90deg, #4a90e2, #357abd);
     transform: scaleX(0);
     transition: transform 0.3s ease;
 }
 
 .game-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 12px 30px rgba(255, 215, 0, 0.2);
-    border-color: #FFA500;
+    box-shadow: 0 12px 30px rgba(74, 144, 226, 0.15);
+    border-color: #357abd;
 }
 
 .game-card:hover::before {
@@ -995,12 +996,12 @@ a:hover {
 .card-header h4 {
     font-size: 18px;
     font-weight: 700;
-    color: #FFD700;
+    color: #2c5aa0;
     margin: 0;
 }
 
 .arrow-icon {
-    color: #FFD700;
+    color: #4a90e2;
     font-size: 16px;
     font-weight: bold;
     transition: transform 0.3s ease;

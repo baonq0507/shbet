@@ -2,7 +2,7 @@
     <div class="user-status">
         <div v-if="isAuthenticated" class="authenticated">
             <span class="welcome">Xin chào, {{ currentUser?.fullname || currentUser?.username || 'User' }}!</span>
-            <span style="padding-left: 10px;">Ví: {{ currentUser?.wallet?.balance || 0 }} </span>
+            <span style="padding-left: 10px;">Ví: {{ formatBalance(currentUser?.balance || 0) }} </span>
             <a-button type="primary" @click="handleDeposit" class="edit-profile-btn" size="small">
                 <i class="fas fa-money-bill-wave"></i>
                 <span style="font-size: 12px; padding-left: 5px;">Nạp tiền</span>
@@ -11,9 +11,9 @@
                 <i class="fas fa-money-bill-wave"></i>
                 <span style="font-size: 12px; padding-left: 5px;">Rút tiền</span>
             </a-button>
-            <!-- <a-button type="link" @click="handleLogout" class="logout-btn">
+            <a-button type="link" @click="handleLogout" class="logout-btn">
                 Đăng xuất
-            </a-button> -->
+            </a-button>
         </div>
         <div v-else class="not-authenticated">
             <span>Bạn chưa đăng nhập</span>1
@@ -26,6 +26,9 @@ import { toast } from 'vue3-toastify';
 import { useStore } from 'vuex';
 import { computed } from 'vue';
 const store = useStore();
+import { formatBalance } from '@/utils';
+
+const emit = defineEmits(['open-deposit-popup', 'open-withdraw-popup']);
 
 const isAuthenticated = computed(() => {
     console.log('UserStatus computed isAuthenticated:', store.state.auth.isLogin);
@@ -35,6 +38,14 @@ const currentUser = computed(() => {
     console.log('UserStatus computed currentUser:', store.state.auth.user);
     return store.state.auth.user;
 });
+
+const handleDeposit = () => {
+    emit('open-deposit-popup');
+};
+
+const handleWithdraw = () => {
+    emit('open-withdraw-popup');
+};
 
 const handleLogout = async () => {
     try {
@@ -57,7 +68,7 @@ const handleLogout = async () => {
     padding: 10px;
     border-radius: 8px;
     margin: 10px 0;
-    color: #FFD700;
+    color: #2c5aa0;
 }
 
 .authenticated {
@@ -68,7 +79,7 @@ const handleLogout = async () => {
 
 .welcome {
     font-weight: bold;
-    color: #FFD700;
+    color: #ffffff;
 }
 
 .logout-btn {
@@ -78,5 +89,9 @@ const handleLogout = async () => {
 .not-authenticated {
     text-align: center;
     color: #666;
+}
+
+.english-text {
+    color: #ffffff;
 }
 </style> 

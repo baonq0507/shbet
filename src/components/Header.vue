@@ -1,13 +1,14 @@
 <script setup>
 import { ref, onMounted, onBeforeUnmount, computed } from 'vue';
-import logo from '@assets/logo.png';
+import logo from '@assets/logo.jpg';
 import Register from '@components/modal/Register.vue';
 import Login from '@components/modal/Login.vue';
+import Deposit from '@components/modal/Deposit.vue';
 import { useStore } from 'vuex';
 import UserStatus from '@components/UserStatus.vue';
 const store = useStore();
 
-const emit = defineEmits(['open-login-popup', 'open-register-popup']);
+const emit = defineEmits(['open-login-popup', 'open-register-popup', 'open-deposit-popup', 'open-withdraw-popup']);
 
 const handleOpenLoginPopup = () => {
     emit('open-login-popup');
@@ -17,11 +18,19 @@ const handleOpenRegisterPopup = () => {
     emit('open-register-popup');
 }
 
+const handleOpenDepositPopup = () => {
+    emit('open-deposit-popup');
+}
+
+const handleOpenWithdrawPopup = () => {
+    emit('open-withdraw-popup');
+}
+
 const canvasRef = ref(null);
 
 function randomColor() {
     const colors = [
-        '#FFD700', '#FF69B4', '#00FFFF', '#FF4500', '#7CFC00', '#1E90FF', '#FF6347', '#FFF700'
+        '#4a90e2', '#357abd', '#2c5aa0', '#5a9bd4', '#7bb3e6', '#1e90ff', '#101929', '#101929'
     ];
     return colors[Math.floor(Math.random() * colors.length)];
 }
@@ -151,11 +160,14 @@ onMounted(() => {
                 </a-space>
             </a-col>
             <a-col :span="8" v-else>
-                <UserStatus />
+                <UserStatus 
+                    @open-deposit-popup="handleOpenDepositPopup"
+                    @open-withdraw-popup="handleOpenWithdrawPopup"
+                />
             </a-col>
             <a-col :span="6" >
                 <a-button type="link" size="small" style="padding: 0; margin-top: 10px;">
-                    <i class="fas fa-headset" style="font-size: 20px; color: #FFD700;"></i>
+                    <i class="fas fa-headset" style="font-size: 20px; color: #4a90e2;"></i>
                 </a-button>
             </a-col>
         </a-row>

@@ -51,6 +51,26 @@ const mutations = {
     setIsLogin(state, isLogin) {
         state.isLogin = isLogin;
     },
+    updateUser(state, user) {
+        if (state.user && user) {
+            // Merge user data, keeping existing data and updating with new data
+            state.user = { ...state.user, ...user };
+            saveUser(state.user);
+            
+        }
+    },
+    updateUserPoints(state, newPoints) {
+        if (state.user) {
+            state.user.points = newPoints;
+            saveUser(state.user);
+        }
+    },
+    updateUserBalance(state, newBalance) {
+        if (state.user) {
+            state.user.balance = newBalance;
+            saveUser(state.user);
+        }
+    },
 };
 
 const getters = {

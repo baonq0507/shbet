@@ -61,3 +61,7 @@ export const clearUser = () => {
     clearStorage(import.meta.env.VITE_KEY_USER || 'user');
 }
 
+export const formatBalance = (balance) => {
+    return balance.toLocaleString('vi-VN');
+}
+
